@@ -1,6 +1,8 @@
 import com.opencsv.*;
 import java.io.*;
 import java.net.URL;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 
 public class Main {
     //Java Strings are conceptually encoded as UTF-16, which is why greater than 127 was chosen
@@ -48,21 +50,38 @@ public class Main {
             CSVReader reader = new CSVReader(new FileReader("hotels.csv"));
             String[] nextLine = reader.readNext();
 
-            //Outputting in HTML
-            PrintWriter pw = new PrintWriter(new FileWriter("outputHTML.html"));
-            //Outputting the headers, nicely
-            pw.println("<TABLE BORDER><TR><TH>"+nextLine[0]+"</TH><TH>"+nextLine[1]+"</TH><TH>"+nextLine[2]+"</TH><TH>"+nextLine[3]+"</TH><TH>"+nextLine[4]+"</TH><TH>"+nextLine[5]+"</TH></TR>");
+            /*OUTPUTTING IN A EXCEL FILE*/
 
-            //Outputting everything in a simple HTML table
-            while ((nextLine = reader.readNext()) != null) {
+            //Create blank workbook
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            //Create a blank sheet
+            XSSFSheet sheet = workbook.createSheet("Outputting My Own Custom Format - A Excel File");
+
+            //Outputting the headers
+            int rowNum = 0;
+            int colNum = 0;
+            Row row = sheet.createRow(rowNum);
+            for(String column: nextLine){
+                Cell cell = row.createCell(colNum++);
+                cell.setCellValue(column);
+            }
+
+            //Outputting everything else
+            while((nextLine = reader.readNext()) != null){
                 if(isAscii(nextLine[0]) && isAscii(nextLine[1]) && isCorrectRatings(nextLine[2]) && isAscii(nextLine[3]) && isValidURL(nextLine[5])){
-                    pw.println("<TR ALIGN=CENTER><TD>" + nextLine[0]  + "</TD><TD>"+ nextLine[1]+"</TD><TD>"+ nextLine[2]+"</TD><TD>"+ nextLine[3]+"</TD><TD>"+ nextLine[4]+"</TD><TD>"+ nextLine[5]+"</TD>");
+                    row = sheet.createRow(++rowNum);
+                    colNum = 0;
+                    for(String column: nextLine){
+                        Cell cell = row.createCell(colNum++);
+                        cell.setCellValue(column);
+                    }
                 }
             }
 
-            //Finished outputting in HTML
-            pw.println("</TABLE>");
-            pw.close();
+            //Write the workbook in file system. Finished outputting in an EXCEL file
+            FileOutputStream outputStream = new FileOutputStream("C:/Users/Swati/Documents/Java/TrivagoEXCELoutput/outputEXCEL.xlsx");
+            workbook.write(outputStream);
+            workbook.close();
         }
         catch(Exception e){
             System.out.print(e);
