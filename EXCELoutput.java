@@ -79,7 +79,7 @@ public class Main {
             }
 
             //Write the workbook in file system. Finished outputting in an EXCEL file
-            FileOutputStream outputStream = new FileOutputStream("C:/Users/Swati/Documents/Java/TrivagoEXCELoutput/outputEXCEL.xlsx");
+            FileOutputStream outputStream = new FileOutputStream("C:/Users/Documents/Java/EXCELoutput/outputEXCEL.xlsx");
             workbook.write(outputStream);
             workbook.close();
         }
