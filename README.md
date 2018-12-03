@@ -4,7 +4,7 @@ My objective with this was to code a program that reads data from a CSV file, va
 I focused more on code quality rather than performance.
 
 The program does the following: 
-1. Reads data from the CSV file `hotels.csv`. The first line is a header which describes all field names. 
+1. Reads data from the CSV file `hotels.csv`. The first line is a header which describes all field names. Headers are hotel_name, hotel_address, hotel_rating, contact, hotel_phone, and hotel_url. 
 2. Validates the data. Kept it simple, with the following rules: 
 - A hotel name may only contain UTF-16 characters.
 - The hotel URL must be valid (came up with my own definition what it means to be "valid").
