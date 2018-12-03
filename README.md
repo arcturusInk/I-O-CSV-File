@@ -6,7 +6,7 @@ I focused more on code quality rather than performance.
 The program does the following: 
 1. Reads data from the CSV file `hotels.csv`. The first line is a header which describes all field names. 
 2. Validates the data. Kept it simple, with the following rules: 
-- A hotel name may only contain UTF-8 characters.
+- A hotel name may only contain UTF-16 characters.
 - The hotel URL must be valid (came up with my own definition what it means to be "valid").
 - Hotel ratings are given as a number from 0 to 5 stars.
 - There may be no negative numbers.
