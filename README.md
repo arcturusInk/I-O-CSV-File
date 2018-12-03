@@ -1,5 +1,5 @@
 # I-O-CSV-File
-My objective with this was to code a program that reads data from a CSV file, validates the data, and writes it to at least two different output files, in two different formats.
+My objective with this was to code a program that loaded the data from a CSV file, cleaned the data using the validation rules specified below, and write it to two different output files, in two different formats.
 
 I focused more on code quality rather than performance.
 
